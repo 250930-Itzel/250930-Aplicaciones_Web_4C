@@ -29,9 +29,18 @@ function mostrar(n) {
     // Mueve la pista del carrusel
     pista.style.transform = `translateX(-${indice * 100}%)`;
 
-    // ... (el resto de tu código de indicadores se queda igual)
+    // Actualiza el estado visual de los indicadores (puntos inferiores)
+    if (indicadores) {
+        const puntos = indicadores.querySelectorAll('button');
+        puntos.forEach((punto, i) => {
+            if (i === indice) {
+                punto.classList.add('activo');
+            } else {
+                punto.classList.remove('activo');
+            }
+        });
+    }
 }
-
 
 const btnAnterior = document.getElementById('anterior');
 const btnSiguiente = document.getElementById('siguiente');
@@ -58,21 +67,21 @@ function abrir(tarjeta) {
     const src = tarjeta.dataset.src;
     let visor = null; // Inicializar explícitamente
 
-if (tipo === 'video') {
-    visor = document.createElement('video');
-    visor.controls = true;
-    visor.playsInline = true;
-    visor.autoplay = true;
-} else if (tipo === 'audio') {
-    visor = document.createElement('audio');
-    visor.controls = true;
-    visor.autoplay = true;
-} else {
-    visor = document.createElement('iframe');
-    visor.title = 'Vista previa del capítulo PDF';
-}
+    if (tipo === 'video') {
+        visor = document.createElement('video');
+        visor.controls = true;
+        visor.playsInline = true;
+        visor.autoplay = true;
+    } else if (tipo === 'audio') {
+        visor = document.createElement('audio');
+        visor.controls = true;
+        visor.autoplay = true;
+    } else {
+        visor = document.createElement('iframe');
+        visor.title = 'Vista previa del capítulo PDF';
+    }
 
-  visor.src = src;
+    visor.src = src;
     contenido.replaceChildren(visor);
     modal.hidden = false;
     document.body.classList.add('modal-abierto');
