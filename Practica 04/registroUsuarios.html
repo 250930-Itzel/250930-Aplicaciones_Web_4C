@@ -1,14 +1,20 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <!--VINCULACIÓN DE JAVASCRIPT -->
+    <script src="js/main.js" defer></script>
+
+
 </head>
 <body>
     <header>
         <h1>MecaGest</h1>
-        <h2>Registro De Nuevos Usuarios-250930</h2>
+        <h2>Registro De Nuevos Usuarios-250953</h2>
         <p>Complete los cambios para solicitar una cuenta en el sistema.</p>
     </header>
 
@@ -55,6 +61,8 @@
 
             <label for="fechaNacimiento">Fecha De Nacimiento:</label>
             <input type="date" id="fechaNacimiento" placeholder="Ingrese su fecha de nacimiento" required>
+            <!-- AGREGUE ESTA LÍNEA JUSTO AQUÍ  -->
+            <div id="resultadoEdad">Selecciona una fecha para calcular tu edad.</div>    
             <br>
             </fieldset>
 
@@ -72,6 +80,24 @@
             <label for="horarioContacto">Favor de contactar en el horario establecido:</label>
             <input type="time" id="horarioContactoInicio" placeholder="09:00" required> a
             <input type="time" id="horarioContactoFin" placeholder="18:00" required> 
+            <br>
+
+            <h4>Redes Sociales</h4>
+
+            <input type="checkbox" id="socialesNetwork">
+            <label for="urlFacebook">Facebook:</label>
+            <input type="url" placeholder="http://www.facebook.com/UserName">
+            <br>
+
+            <input type="checkbox" id="socialesNetwork">
+            <label for="urlLinkedn">Linkedn:</label>
+            <input type="url" placeholder="http://www.linkdn.com/UserName">
+            <br>
+
+            <input type="checkbox" id="socialesNetwork">            
+            <label for="urlFacebook">WhatsApp: (Carga QR)</label>
+            <input type="file" id="whatsAppQR" accept="image/*">
+
 
             </fieldset>
 
@@ -136,13 +162,22 @@
 
         <br>
         <br>
-        <h4>Estos campos son para futuro uso, no son parte del Formulario de Registro</h4>
+
+        <h4>Esto son para futuro uso,  no son parte del Formulario De Registro Usuario</h4>
         <form> <!----Elementos input que usaremos más adelante---->
 
             <fieldset>
                 <legend>Vizualización De Citas Por Mes:</legend>
-                <label for="mesCitas">Porfavor elige un mes:</label>
-                <input type="month" id="mesCitas">
+                <label for="mesCitas">Porfavor, elige el filtro:</label>
+
+                <input type="radio" value="Month" name="appoimentFilter" id="appoimentByMonth" checked>Mes
+
+                <input type="radio" value="Month" name="appoimentFilter" id="appoimentByWeek" >Semana
+                <br>
+
+                <input type="month">
+                <br>
+                <input type="week" disabled>
                 <button id="verCitas">Ver Citas</button>
 
                 <br>
@@ -242,124 +277,166 @@
                 
                 </table>
             </fieldset>
-            
+            <fieldset> 
 
-            <fieldset>
                 <legend>Configuraciones De La Interfaz :</legend>
                 <label for="fontColor">Color de la Fuente</label>
                 <input type="color" id="fontColor">
                 <br>
+                
                 <label for="backgroundColor">Color de Fondo</label>
                 <input type="color" id="backgroundColor" value="#CCC">
+                <br>
+                
+                <label for="soundsVolume">Volumen de reproduccioón de sonidos</label>
+                <input type="range" id="soundsVolume" min="0" max="100" value="80">
+                <button id="muteSounds">Silencias Sonidos</button>
+
                 
             </fieldset>
-             <fieldset> 
-                <legend>Configuracion de Mi cuenta/Perfil: </legend>
-                <label for = "userPhoto">Foto de Perfil: </label>
-                <input type="file" id="userPhoto" accept="image/*">
-                <br>
-                <input type="image" id="buttonNext" src="assets/imagenes/next.gif" alt="Siguente" width="50" height="50">
-                <br>
-                <input type="hidden" id="userId" value="250930">
-            </fieldset>
 
-            <fieldset>
-                <legend>Datos Fiscales</legend>
-                <label for="rfc">Registro Federal de Causantes (RFC): </label>
-                <input type="text" id="rfc" maxlength="13" placeholder="SAXXXXXXXXXX">
-                <br>
-                <label for="fiscalSituation">Constancia de Situación Fiscal: </label>
-                <input type="file" id="fiscalSituacion" accept=".pdf">
-                <input type="hidden" id="userId" value="250930">
-            </fieldset>
-            <fieldset>
-                <legend>Solicitud de Cita: </legend>
-                <label for="dateAppoiment">Fecha de la Cita: </label>
-                <input type="dateTime-local" id="dateAppoiment">
-                <br>
-                <label for="descripcionText">Descripcion de la cita: </label>
-                <textarea id="descripcionText"></textarea>
-                <br>
-            </fieldset>
-            <fieldset>
-                <legend> Solicitud de Herrramienta y Refacciones para Servicio Mécanico </legend>
-                <label for="resourceCategory"> Categoria de Recurso: </label>
-                <input type="radio" id="resourceRefaction" name="resourceCategory" value="refacccion"> Refaccion
-                <input type="radio" id="resourceTool" name="resourceCategory" value="refacccion"> Herramienta
-                <br>
-                <label for="toolName"> Elige la pieza: </label>
-                <select>
-                    <optgroup label="Piezas de Motor">
-                        <option value="bujia">Bujía</option>
-                        <option value="filtro_aceite">Flitro de Aceite</option>
-                        <option value="banda_distribucion">Bande de Distribucion</option>
-                    </optgroup>
-                    <optgroup label="Piezas de Transmicion">
-                        <option value="bujia">Bujía</option>
-                        <option value="filtro_aceite">Flitro de Aceite</option>
-                        <option value="banda_distribucion">Bande de Distribucion</option>
-                    </optgroup>
-                    <optgroup label="Piezas de Suspencucion">
-                        <option value="bujia">Bujía</option>
-                        <option value="filtro_aceite">Flitro de Aceite</option>
-                        <option value="banda_distribucion">Bande de Distribucion</option>
-                    </optgroup>
-                    <optgroup label="Llaves y Hernrramientas Especializadas">
-                        <option value="bujia">Bujía</option>
-                        <option value="filtro_aceite">Flitro de Aceite</option>
-                        <option value="banda_distribucion">Bande de Distribucion</option>
-                    </optgroup>
-                </select>
-                <label for="toolQuantity"> Cantidad </label>
-                <input type="number" id="toolQuantity" min="1" max="10">
-                <button id="requestTool"> Solicitar Herramienta</button>
-                <br>
-               <table border="1" cellpadding="8" cellspacing="0">
-  <caption>Herramientas para la orden de servicio</caption>
-  <tr>
-    <th>No.</th>
-    <th>Herramienta</th>
-    <th>Categoría</th>
-    <th>Cantidad</th>
-    <th>Unidad</th>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>Llave combinada</td>
-    <td>Herramienta manual</td>
-    <td>4</td>
-    <td>Piezas</td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>Llave dinamométrica</td>
-    <td>Herramienta especializada</td>
-    <td>2</td>
-    <td>Piezas</td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>Extractor de poleas</td>
-    <td>Herramienta especializada</td>
-    <td>1</td>
-    <td>Juego</td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>Llave Torx</td>
-    <td>Herramienta manual</td>
-    <td>3</td>
-    <td>Juegos</td>
-  </tr>
-  <tr>
-    <td colspan="3" align="center"><b>Total de unidades</b></td>
-    <td>10</td>
-    <td>-</td>
-  </tr>
-</table>
+            <!---->
+            <fieldset> 
 
-                </table>
-            </fieldset> 
+        <legend>Configuración de Mi cuenta/Perfil: </legend>
+        <label for ="userPhoto">Foto de Perfil:</label>
+        <input type="file" id="userPhoto" accept="image/*">
+        <br>
+        <input type="image" is="buttonNext" src="assets/imagenes/next.webp" alt="Siguiente" width="50" height="50">
+         <br>
+        <input type="hidden" id="userId" value="25XXXX">
+    </fieldset>
+
+    <fieldset>
+        <legend>Datos fiscales:</legend>
+        <label for="rfc">Registro Federal de Causantes (RFC): </label>
+        <input type="text" id="rfc" maxlength="13" placeholder="RAHMXXXXXX">
+        <br>
+        <label for="fiscalSiuacion"> Constancia de Situación Fiscal: </label>
+        <input type="file" id="fiscalSituación" accept="pdf">
+        <input tipe="hidden" id="userId" value="25XXXX">
+    </fieldset>
+
+    <fieldset>
+        <legend>Solicitud de cita</legend>
+        <label for="dateAppoiment"> Fecha de la cita: </label>
+        <input type="datetime-local" id="dateAppoiment">
+        <br>
+
+        <label for="locations">Elige la sucursal:</label>
+        <input list="locationsList" placeholder="Busca tu sucursal preferida...">
+
+        <datalist id="locationsList">
+            <option>Xicotepec, Centro</option>
+            <option>Xicotepec, El Tabacal</option>
+            <option>San Isidro, Tierra Negra</option>
+            <option>Necaxa, Canaditas</option>
+            <option>Huachinango, Petrolera 1</option>
+
+        </datalist>
+        <br>
+
+        <label for="descriptionText">Descripcion de la cita:</label>
+        <textarea id="descritionText"></textarea>
+        <br>
+    </fieldset>
+
+    <fieldset>
+        <legend>Solicitud de Herramientas para Servicio Mécanico: </legend>
+        <label for="toolName">Elige lapieza: </label>
+        <input type="radio" id="resourceRefaction" name="resourceCategory" value="refaccion">Refacción
+        <input type="radio" id="resourceTool" name="resourceCategory" value="tool">Herramienta
+        <br>
+        <label for="resourceCategoryPieza">Pieza</label>
+        <label for="toolNmae">Elige la Pieza:</label>
+         <select>
+            <optgroup label="Pieza de Motor">
+                <option value="bujia">Bujía</option>
+                <option value="filtro_aceite">Filtreo de aceite</option>
+                <option value="banda_distribución">Banda de distribución</option>
+            </optgroup>  
+
+            <optgroup label="Piezas de transmisión">
+                <option value="disco_embrague">Disco de embrague</option>
+                <option value="collarin">Collarin de embargue</option>
+                <option value="junta_homocinetica">Junta homocinetica</option>
+                <option value="semieje">Semeije de transmisión</option>
+            </optgroup>   
+
+            <optgroup label="Piezas de Suspensión">
+                <option value="amortiguador">Amortiguador</option>
+                <option value="rotula">Rótula de suspensión</option>
+            </optgroup>    
+
+            <optgroup label="Llaves y Herramientas Especializadas">
+                <option value="llave_combinada">Llave combinada</option>
+                <option value="llave_torx">Llave Torx</option>
+                <option value="Llave_dinamometrica">Llave dinamometrica</option>
+                <option value="extractor_poleas">Extractor de poleas</option>
+                <option value="compresor_resortes">Compresor de resortes</option>
+                <option value="scanner_obd2">Escáner automotriz OBD-II</option>
+            </optgroup>
+        </select>
+
+        <label for="toolQuantity">Cantidad</label>
+        <input type="number" id="toolQuantity" min="1" max="10">
+        <button id="requestTool">Solicitar Herramienta</button>
+        <br>
+
+        <table style="border: 1px solid black">
+            <tr>
+                <th style="border: 1px solid black">No.</th>
+                <th style="border: 1px solid black">Herramienta</th>
+                <th style="border: 1px solid black">Categoría</th>
+                <th style="border: 1px solid black">Cantidad</th>
+                <th style="border: 1px solid black">Unidad</th>
+        </tr>
+
+            <tr>
+            <td style="border: 1px solid black">1.</td>
+            <td style="border: 1px solid black">Llave combinada</td>
+            <td style="border: 1px solid black">Herramienta manual</td>
+            <td style="border: 1px solid black">4</td>
+            <td style="border: 1px solid black">piezas</td>
+        </tr>
+        
+        <tr>
+            <td style="border: 1px solid black">2.</td>
+            <td style="border: 1px solid black">Llave dinamométrica</td>
+            <td style="border: 1px solid black">Herramienta especializada</td>
+            <td style="border: 1px solid black">2</td>
+            <td style="border: 1px solid black">piezas</td>
+        </tr>
+
+        <tr>
+            <td style="border: 1px solid black">3.</td>
+            <td style="border: 1px solid black">Extractor de poleas</td>
+            <td style="border: 1px solid black">Herramienta especializada</td>
+            <td style="border: 1px solid black">1</td>
+            <td style="border: 1px solid black">juegos</td>
+        </tr>
+
+        <tr>
+            <td style="border: 1px solid black">4.</td>
+            <td style="border: 1px solid black">Llave Torx</td>
+            <td style="border: 1px solid black">Herramienta manual</td>
+            <td style="border: 1px solid black">3</td>
+            <td style="border: 1px solid black">juegos</td>
+        </tr>
+
+        <tr>
+            <td style="border: 1px solid black"></td>
+            <td style="border: 1px solid black"></td>
+            <td style="border: 1px solid black">Total de unidades</td>
+            <td style="border: 1px solid black">10</td>
+            <td style="border: 1px solid black">-</td>
+        </tr>
+    </fieldset>
+
+        </form>    
+    </main>
+</body>
+</html>
 
 
 
