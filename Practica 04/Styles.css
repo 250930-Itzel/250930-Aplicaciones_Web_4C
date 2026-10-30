@@ -1,0 +1,332 @@
+/* ==========================================================================
+   1. CONFIGURACIÓN GENERAL Y VARIABLES (Basado en tu paleta)
+   ========================================================================== */
+:root {
+    --bg-body: #0f172a;
+    --bg-footer: #020617;
+    --bg-card-dark: #1e293b;
+    --bg-input: #293b55;
+    --bg-button-base: #334155;
+    
+    /* Tonos Claros */
+    --bg-light-clean: #f8fafc;
+    --bg-light-soft: #e0f2fe;
+    --bg-light-neutral: #f1f5f9;
+    
+    /* Acentos Brillantes */
+    --accent-cyan: #67e8f9;
+    --accent-celeste: #38bdf8;
+    --accent-hover-vibrant: rgb(34, 238, 228);
+    --accent-blue-royal: #2563eb;
+    --accent-purple: #7c3aed;
+    
+    /* Textos y Contrastes */
+    --text-light-main: #ffffff;
+    --text-light-secondary: #cbd5e1;
+    --text-dark-main: #111827;
+    --text-dark-secondary: #222222;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-light-main);
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* ==========================================================================
+   2. ESTRUCTURA DE CONTENEDORES (Header y Main)
+   ========================================================================== */
+header {
+    background-color: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+header h1 {
+    color: var(--accent-celeste);
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+
+header h2 {
+    color: var(--text-light-secondary);
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+header p {
+    color: #dbeafe;
+    margin-top: 10px;
+    font-size: 0.95rem;
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+h4 {
+    color: var(--accent-cyan);
+    margin: 20px 0 10px 0;
+    font-size: 1.1rem;
+}
+
+/* Separador de avisos futuros en el flujo */
+main > br + br + h4 {
+    border-top: 2px dashed var(--bg-button-base);
+    padding-top: 30px;
+    color: var(--accent-celeste);
+}
+
+/* ==========================================================================
+   3. FORMULARIOS Y ELEMENTOS DE CONTROL (Fieldsets e Inputs)
+   ========================================================================== */
+fieldset {
+    background-color: var(--bg-card-dark);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+legend {
+    background-color: var(--accent-blue-royal);
+    color: var(--text-light-main);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+label {
+    display: inline-block;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: var(--text-light-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Estilos comunes para campos de datos */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="url"],
+input[type="date"],
+input[type="time"],
+input[type="month"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px 14px;
+    background-color: var(--bg-input);
+    border: 1px solid var(--bg-button-base);
+    border-radius: 6px;
+    color: var(--text-light-main);
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+/* Enfoque de campos (Focus) */
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent-celeste);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+/* Controles de fila específicos para los inputs de rango de tiempo */
+input[type="time"] {
+    display: inline-block;
+    width: auto;
+    margin: 5px;
+}
+
+/* Textarea para descripciones */
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Checkboxes y Radios */
+input[type="checkbox"],
+input[type="radio"] {
+    margin-right: 8px;
+    cursor: pointer;
+    accent-color: var(--accent-celeste);
+}
+
+/* Inputs de archivos */
+input[type="file"] {
+    background: transparent;
+    border: none;
+    color: var(--text-light-secondary);
+    padding: 5px 0;
+}
+
+/* Foto de perfil (Borde blanco puro según requerimiento) */
+input[type="image"] {
+    border: 2px solid var(--text-light-main);
+    border-radius: 50%;
+    padding: 4px;
+    background-color: var(--bg-button-base);
+    transition: transform 0.2s ease;
+}
+input[type="image"]:hover {
+    transform: scale(1.05);
+}
+
+/* Slider de rango */
+input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent-blue-royal);
+    margin: 10px 0;
+}
+
+/* ==========================================================================
+   4. TABLAS (Visualización de datos)
+   ========================================================================== */
+table {
+    width: 100%;
+    border-collapse: collapse !important; /* Forzar colapso de bordes inline antiguos */
+    margin: 20px 0;
+    background-color: var(--bg-light-clean); /* Fondo claro limpio para alto contraste */
+    color: var(--text-dark-main);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #cbd5e1 !important; /* Reemplaza el inline black */
+}
+
+th {
+    background-color: var(--bg-footer); /* Azul noche casi negro */
+    color: var(--text-light-main);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+/* Alternancia de filas usando tus clases lógicas */
+tr:nth-child(even) {
+    background-color: var(--bg-light-neutral); /* Gris neutro claro */
+}
+
+tr:hover {
+    background-color: var(--bg-light-soft); /* Destacado celeste suave en hover */
+}
+
+/* ==========================================================================
+   5. BOTONES Y ACCIONES (Transiciones y Efectos Hover)
+   ========================================================================== */
+button,
+input[type="submit"],
+input[type="reset"] {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 8px 5px 8px 0;
+    display: inline-block;
+}
+
+/* Estado Base */
+button,
+input[type="reset"] {
+    background-color: var(--bg-button-base);
+    color: var(--text-light-main);
+}
+
+input[type="submit"] {
+    background: linear-gradient(135deg, var(--accent-blue-royal), var(--accent-purple));
+    color: var(--text-light-main);
+}
+
+/* Estados Hover */
+button:hover,
+input[type="reset"]:hover {
+    background-color: var(--accent-hover-vibrant);
+    color: var(--text-dark-main); /* Cambio de contraste para texto en fondo turquesa brillante */
+    box-shadow: 0 0 15px rgba(34, 238, 228, 0.4);
+}
+
+input[type="submit"]:not(:disabled):hover {
+    filter: brightness(1.2);
+    box-shadow: 0 0 15px rgba(124, 58, 237, 0.4);
+}
+
+/* Botones Deshabilitados */
+input[type="submit"]:disabled,
+input[type="week"]:disabled {
+    background: #475569 !important;
+    color: #94a3b8 !important;
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none !important;
+}
+/* ==========================================================================
+   6. VALIDACIÓN DE EDAD (Mensajes dinámicos)
+   ========================================================================== */
+#resultadoEdad {
+    margin-top: 10px;
+    margin-bottom: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 12px;
+    border-radius: 6px;
+    display: block;
+    color: var(--text-light-secondary);
+    border: 1px dashed var(--bg-button-base);
+    background-color: rgba(30, 41, 59, 0.5);
+    transition: all 0.3s ease;
+}
+
+/* Estado: Mayor de edad (Verde claro en fondo translúcido) */
+.edad-estado--mayor {
+    color: #4ade80 !important;
+    background-color: rgba(21, 128, 61, 0.2) !important;
+    border: 1px solid rgba(74, 222, 128, 0.4) !important;
+}
+
+/* Estado: Menor de edad (Texto rojo / rosa según la alerta del video) */
+.edad-estado--menor {
+    color: #f87171 !important;
+    background-color: rgba(185, 28, 28, 0.15) !important;
+    border: 1px solid rgba(248, 113, 113, 0.4) !important;
+}
+
+/* Estado: Error de fecha futura */
+.edad-estado--error {
+    color: #f87171 !important;
+    background-color: rgba(185, 28, 28, 0.2) !important;
+    border: 1px solid rgba(248, 113, 113, 0.4) !important;
+}
