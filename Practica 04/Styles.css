@@ -330,3 +330,24 @@ input[type="week"]:disabled {
     background-color: rgba(185, 28, 28, 0.2) !important;
     border: 1px solid rgba(248, 113, 113, 0.4) !important;
 }
+
+
+/* Validación de campos obligatorios y mensajes */
+label:has(+ input[required]),
+label:has(+ select[required]),
+label:has(+ textarea[required]) { color: var(--text-light-main); }
+
+.mensaje-error {
+  display: block;
+  color: #fca5a5;
+  font-size: .85rem;
+  margin: -4px 0 10px;
+  line-height: 1.35;
+}
+.campo-invalido {
+  border: 2px solid #f87171 !important;
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, .15) !important;
+}
+input:required, select:required, textarea:required { border-left: 3px solid var(--accent-celeste); }
+#Validado { margin-top: 18px; }
+#btnEnviar { min-width: 180px; }
