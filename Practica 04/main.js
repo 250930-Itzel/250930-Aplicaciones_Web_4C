@@ -118,14 +118,30 @@ if (formulario) {
   const campos = Array.from(formulario.querySelectorAll("input, select, textarea"))
     .filter(campo => campo.type !== "submit" && campo.type !== "reset" && campo.type !== "button" && campo.type !== "file" && campo.type !== "hidden");
 
+  // Icono representativo para cada sección del registro.
+  // Se utiliza el título del fieldset para que cada paso tenga su propio símbolo.
+  const iconosPorSeccion = [
+    { palabras: ["personal"], icono: "👤", nombre: "Datos personales" },
+    { palabras: ["contacto"], icono: "✉️", nombre: "Datos de contacto" },
+    { palabras: ["acceso"], icono: "🔐", nombre: "Datos de acceso" },
+    { palabras: ["ubicación", "ubicacion"], icono: "📍", nombre: "Datos de ubicación" },
+    { palabras: ["confirmación", "confirmacion"], icono: "✓", nombre: "Confirmación" }
+  ];
+
   const botonesPasos = pasos.map((paso, indice) => {
     paso.classList.add("paso-formulario");
     const titulo = paso.dataset.titulo || paso.querySelector("legend")?.textContent || "Sección";
+    const tituloNormalizado = titulo.toLocaleLowerCase("es");
+    const configuracionIcono = iconosPorSeccion.find(item =>
+      item.palabras.some(palabra => tituloNormalizado.includes(palabra))
+    );
+    const icono = configuracionIcono?.icono || "•";
     const boton = document.createElement("button");
     boton.type = "button";
     boton.className = "boton-seccion";
     boton.setAttribute("aria-label", "Ir a " + titulo);
-    boton.innerHTML = '<span class="numero-paso">' + (indice + 1) + '</span><span class="texto-paso">' + titulo + '</span>';
+    boton.title = titulo;
+    boton.innerHTML = '<span class="numero-paso" aria-hidden="true">' + icono + '</span><span class="texto-paso">' + titulo + '</span>';
     boton.addEventListener("click", () => {
       if (indice > pasoActual) {
         for (let i = pasoActual; i < indice; i++) {
