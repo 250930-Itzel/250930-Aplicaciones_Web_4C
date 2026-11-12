@@ -556,7 +556,7 @@ input:focus, select:focus, textarea:focus {
 input[type="checkbox"], input[type="radio"], input[type="range"] {
   accent-color: #bd75ad;
 }
-input[type="file] { color: #76677e; }
+input[type="file"] { color: #76677e; }
 
 button, input[type="submit"], input[type="reset"] {
   border-radius: 999px;
