@@ -121,11 +121,11 @@ if (formulario) {
   // Icono representativo para cada sección del registro.
   // Se utiliza el título del fieldset para que cada paso tenga su propio símbolo.
   const iconosPorSeccion = [
-    { palabras: ["personal"], icono: "👤", nombre: "Datos personales" },
-    { palabras: ["contacto"], icono: "✉️", nombre: "Datos de contacto" },
-    { palabras: ["acceso"], icono: "🔐", nombre: "Datos de acceso" },
-    { palabras: ["ubicación", "ubicacion"], icono: "📍", nombre: "Datos de ubicación" },
-    { palabras: ["confirmación", "confirmacion"], icono: "✓", nombre: "Confirmación" }
+    { palabras: ["personal"], icono: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20c.7-3.5 3.1-5.3 7-5.3s6.3 1.8 7 5.3"></path></svg>', nombre: "Datos personales" },
+    { palabras: ["contacto"], icono: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="14" rx="2"></rect><path d="m4.5 7 7.5 6 7.5-6"></path></svg>', nombre: "Datos de contacto" },
+    { palabras: ["acceso"], icono: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10" width="15" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3"></path><path d="M12 14v2"></path></svg>', nombre: "Datos de acceso" },
+    { palabras: ["ubicación", "ubicacion"], icono: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"></path><circle cx="12" cy="10" r="2.3"></circle></svg>', nombre: "Datos de ubicación" },
+    { palabras: ["confirmación", "confirmacion"], icono: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.5-2.8 7.8-7 10-4.2-2.2-7-5.5-7-10V6l7-3Z"></path><path d="m8.5 12 2.3 2.3 4.8-5"></path></svg>', nombre: "Confirmación" }
   ];
 
   const botonesPasos = pasos.map((paso, indice) => {
@@ -141,7 +141,7 @@ if (formulario) {
     boton.className = "boton-seccion";
     boton.setAttribute("aria-label", "Ir a " + titulo);
     boton.title = titulo;
-    boton.innerHTML = '<span class="numero-paso" aria-hidden="true">' + icono + '</span><span class="texto-paso">' + titulo + '</span>';
+    boton.innerHTML = '<span class="numero-paso icono-paso" aria-hidden="true">' + icono + '</span><span class="texto-paso">' + titulo + '</span>';
     boton.addEventListener("click", () => {
       if (indice > pasoActual) {
         for (let i = pasoActual; i < indice; i++) {
