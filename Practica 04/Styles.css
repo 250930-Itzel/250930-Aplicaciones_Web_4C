@@ -690,3 +690,55 @@ input:required, select:required, textarea:required {
   outline-offset: 4px;
   border-radius: 12px;
 }
+
+
+/* Iconografía SVG de cada paso del formulario */
+.numero-paso.icono-paso {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  padding: 9px;
+  font-size: 0;
+  color: #9a6ac0;
+  border: 2px solid #dec9e4;
+  background: #fffaff;
+  transition: color .25s ease, background .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+.icono-paso svg {
+  display: block;
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.boton-seccion.activo .numero-paso.icono-paso {
+  color: #fff;
+  border-color: #bd79b3;
+  background: linear-gradient(135deg, #9a6ac0, #d477ad);
+  transform: scale(1.08);
+  box-shadow: 0 0 0 5px rgba(212, 119, 173, .15), 0 5px 13px rgba(142, 98, 181, .2);
+}
+.boton-seccion.completado .numero-paso.icono-paso {
+  color: #8d4d83;
+  border-color: #d477ad;
+  background: #f7d9eb;
+}
+.boton-seccion:focus-visible {
+  outline: 2px solid #a45e9c;
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+@media (max-width: 650px) {
+  .numero-paso.icono-paso {
+    width: 35px;
+    height: 35px;
+    flex-basis: 35px;
+    padding: 7px;
+  }
+  .icono-paso svg { width: 18px; height: 18px; }
+}
