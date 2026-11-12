@@ -671,3 +671,22 @@ input:required, select:required, textarea:required {
   fieldset { padding: 22px 15px; border-radius: 18px; }
   .numero-paso { border-width: 2px; }
 }
+
+
+/* Iconos temáticos dentro de los círculos de cada sección */
+.numero-paso {
+  font-size: 1.12rem;
+  line-height: 1;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", sans-serif;
+}
+.boton-seccion.activo .numero-paso {
+  transform: scale(1.06);
+}
+.boton-seccion.completado .numero-paso {
+  font-size: 1.15rem;
+}
+.boton-seccion:focus-visible {
+  outline: 3px solid rgba(196, 126, 178, .45);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
