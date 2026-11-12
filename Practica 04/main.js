@@ -110,8 +110,76 @@ function actualizarEdad() {
 }
 
 if (formulario) {
+  const pasos = Array.from(formulario.querySelectorAll(":scope > fieldset"));
+  const navegacion = document.getElementById("navegacionSecciones");
+  const progreso = document.getElementById("progresoFormulario");
+  let pasoActual = 0;
+
   const campos = Array.from(formulario.querySelectorAll("input, select, textarea"))
     .filter(campo => campo.type !== "submit" && campo.type !== "reset" && campo.type !== "button" && campo.type !== "file" && campo.type !== "hidden");
+
+  const botonesPasos = pasos.map((paso, indice) => {
+    paso.classList.add("paso-formulario");
+    const boton = document.createElement("button");
+    boton.type = "button";
+    boton.className = "boton-seccion";
+    boton.textContent = (indice + 1) + ". " + (paso.dataset.titulo || paso.querySelector("legend")?.textContent || "Sección");
+    boton.addEventListener("click", () => {
+      if (indice > pasoActual) {
+        for (let i = pasoActual; i < indice; i++) {
+          if (!validarPaso(i)) return;
+        }
+      }
+      mostrarPaso(indice);
+    });
+    navegacion.appendChild(boton);
+    return boton;
+  });
+
+  const controles = document.createElement("div");
+  controles.className = "controles-pasos";
+  controles.innerHTML = '<button type="button" id="pasoAnterior">Anterior</button><button type="button" id="pasoSiguiente">Siguiente</button>';
+  pasos[pasos.length - 1].appendChild(controles);
+
+  function validarPaso(indice) {
+    let valido = true;
+    campos.filter(campo => pasos[indice].contains(campo)).forEach(campo => {
+      if (!validarCampo(campo)) valido = false;
+    });
+    if (!valido) {
+      const primero = pasos[indice].querySelector(".campo-invalido");
+      if (primero) primero.focus();
+    }
+    return valido;
+  }
+
+  function mostrarPaso(indice) {
+    pasoActual = indice;
+    pasos.forEach((paso, i) => {
+      paso.hidden = i !== indice;
+      paso.classList.toggle("paso-activo", i === indice);
+    });
+    botonesPasos.forEach((boton, i) => {
+      boton.classList.toggle("activo", i === indice);
+      boton.classList.toggle("completado", i < indice);
+      boton.setAttribute("aria-current", i === indice ? "step" : "false");
+    });
+    progreso.textContent = "Sección " + (indice + 1) + " de " + pasos.length + ": " +
+      (pasos[indice].dataset.titulo || pasos[indice].querySelector("legend")?.textContent || "");
+    document.getElementById("pasoAnterior").disabled = indice === 0;
+    document.getElementById("pasoSiguiente").hidden = indice === pasos.length - 1;
+  }
+
+  document.getElementById("pasoAnterior").addEventListener("click", () => {
+    if (pasoActual > 0) mostrarPaso(pasoActual - 1);
+  });
+  document.getElementById("pasoSiguiente").addEventListener("click", () => {
+    if (validarPaso(pasoActual) && pasoActual < pasos.length - 1) {
+      mostrarPaso(pasoActual + 1);
+      pasos[pasoActual].querySelector("input:not([type=hidden]), select, textarea")?.focus();
+    }
+  });
+  mostrarPaso(0);
 
   campos.forEach(campo => {
     campo.addEventListener("input", () => {
@@ -131,7 +199,11 @@ if (formulario) {
     if (!valido) {
       evento.preventDefault();
       const primero = formulario.querySelector(".campo-invalido");
-      if (primero) primero.focus();
+      if (primero) {
+        const indice = pasos.findIndex(paso => paso.contains(primero));
+        if (indice >= 0) mostrarPaso(indice);
+        primero.focus();
+      }
       return;
     }
     evento.preventDefault();
