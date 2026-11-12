@@ -120,10 +120,12 @@ if (formulario) {
 
   const botonesPasos = pasos.map((paso, indice) => {
     paso.classList.add("paso-formulario");
+    const titulo = paso.dataset.titulo || paso.querySelector("legend")?.textContent || "Sección";
     const boton = document.createElement("button");
     boton.type = "button";
     boton.className = "boton-seccion";
-    boton.textContent = (indice + 1) + ". " + (paso.dataset.titulo || paso.querySelector("legend")?.textContent || "Sección");
+    boton.setAttribute("aria-label", "Ir a " + titulo);
+    boton.innerHTML = '<span class="numero-paso">' + (indice + 1) + '</span><span class="texto-paso">' + titulo + '</span>';
     boton.addEventListener("click", () => {
       if (indice > pasoActual) {
         for (let i = pasoActual; i < indice; i++) {
@@ -133,13 +135,29 @@ if (formulario) {
       mostrarPaso(indice);
     });
     navegacion.appendChild(boton);
+
+    const controles = document.createElement("div");
+    controles.className = "controles-pasos";
+    controles.innerHTML = '<button type="button" class="paso-anterior">Anterior</button>' +
+      (indice === pasos.length - 1
+        ? '<span class="texto-final">Última sección</span>'
+        : '<button type="button" class="paso-siguiente">Continuar</button>');
+    paso.appendChild(controles);
+
+    controles.querySelector(".paso-anterior").addEventListener("click", () => {
+      if (pasoActual > 0) mostrarPaso(pasoActual - 1);
+    });
+    const siguiente = controles.querySelector(".paso-siguiente");
+    if (siguiente) {
+      siguiente.addEventListener("click", () => {
+        if (validarPaso(pasoActual) && pasoActual < pasos.length - 1) {
+          mostrarPaso(pasoActual + 1);
+          pasos[pasoActual].querySelector("input:not([type=hidden]), select, textarea")?.focus();
+        }
+      });
+    }
     return boton;
   });
-
-  const controles = document.createElement("div");
-  controles.className = "controles-pasos";
-  controles.innerHTML = '<button type="button" id="pasoAnterior">Anterior</button><button type="button" id="pasoSiguiente">Siguiente</button>';
-  pasos[pasos.length - 1].appendChild(controles);
 
   function validarPaso(indice) {
     let valido = true;
@@ -164,10 +182,14 @@ if (formulario) {
       boton.classList.toggle("completado", i < indice);
       boton.setAttribute("aria-current", i === indice ? "step" : "false");
     });
+    const avance = pasos.length > 1 ? (indice / (pasos.length - 1)) * 100 : 0;
+    navegacion.style.setProperty("--avance", avance + "%");
     progreso.textContent = "Sección " + (indice + 1) + " de " + pasos.length + ": " +
       (pasos[indice].dataset.titulo || pasos[indice].querySelector("legend")?.textContent || "");
-    document.getElementById("pasoAnterior").disabled = indice === 0;
-    document.getElementById("pasoSiguiente").hidden = indice === pasos.length - 1;
+    pasos.forEach((paso) => {
+      const anterior = paso.querySelector(".paso-anterior");
+      if (anterior) anterior.disabled = indice === 0;
+    });
   }
 
   document.getElementById("pasoAnterior").addEventListener("click", () => {
