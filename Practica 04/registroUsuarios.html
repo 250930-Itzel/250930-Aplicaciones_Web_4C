@@ -20,6 +20,8 @@
 
     <main>
         <form id="registroForm" method="post" novalidate>
+            <div id="navegacionSecciones" class="navegacion-secciones" aria-label="Secciones del formulario"></div>
+            <p id="progresoFormulario" class="progreso-formulario" aria-live="polite">Sección 1 de 5</p>
 
             <fieldset>
 
@@ -153,11 +155,16 @@
 
             </fieldset>
 
-            <input type="checkbox" id="Validado" name="terminos" required> <label for="Validado">Acepto los términos y condiciones del uso de la plataforma MecaGest. *</label>
-            <br><br>
-
-            <input type="submit" value="Enviar Solicitud" id="btnEnviar">
-            <input type="reset" value="Limpiar Formulario">
+            <fieldset class="paso-confirmacion" data-titulo="Confirmación">
+                <legend>Confirmación</legend>
+                <p>Revisa que tus datos sean correctos antes de enviar la solicitud.</p>
+                <input type="checkbox" id="Validado" name="terminos" required>
+                <label for="Validado">Acepto los términos y condiciones del uso de la plataforma MecaGest. *</label>
+                <div class="acciones-formulario">
+                    <input type="submit" value="Enviar Solicitud" id="btnEnviar">
+                    <input type="reset" value="Limpiar Formulario">
+                </div>
+            </fieldset>
         </form>
 
         <br>
