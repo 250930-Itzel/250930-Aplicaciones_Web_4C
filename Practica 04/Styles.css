@@ -351,3 +351,43 @@ label:has(+ textarea[required]) { color: var(--text-light-main); }
 input:required, select:required, textarea:required { border-left: 3px solid var(--accent-celeste); }
 #Validado { margin-top: 18px; }
 #btnEnviar { min-width: 180px; }
+
+
+/* Formulario dividido por secciones */
+.navegacion-secciones {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin: 12px 0 10px;
+}
+.boton-seccion {
+  margin: 0;
+  min-height: 48px;
+  padding: 9px 7px;
+  border: 1px solid #475569;
+  background: #1e293b;
+  color: #cbd5e1;
+  font-size: .82rem;
+}
+.boton-seccion.activo {
+  background: linear-gradient(135deg, var(--accent-blue-royal), var(--accent-purple));
+  color: white;
+  border-color: var(--accent-celeste);
+}
+.boton-seccion.completado { border-color: #4ade80; color: #bbf7d0; }
+.progreso-formulario { color: var(--accent-cyan); font-weight: 600; margin: 8px 0 18px; }
+.paso-formulario[hidden] { display: none !important; }
+.controles-pasos, .acciones-formulario {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+.controles-pasos button { min-width: 120px; }
+.controles-pasos button:disabled { opacity: .45; cursor: not-allowed; }
+@media (max-width: 650px) {
+  body { padding: 10px; }
+  .navegacion-secciones { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .boton-seccion { font-size: .78rem; }
+  fieldset { padding: 18px 14px; }
+}
