@@ -17,7 +17,6 @@ const reglas = {
   direccion: { pattern: /^[\p{L}\p{N} .,'#°/()-]+$/u, mensaje: "La dirección contiene caracteres no permitidos." },
   numero: { pattern: /^[\p{L}\p{N} -]+$/u, mensaje: "Usa números y, si corresponde, letras o guion (ej. 12-A)." },
   colonia: { pattern: /^[\p{L}\p{N} .,'#°/-]+$/u, mensaje: "Usa letras, números, espacios y signos comunes de dirección." },
-  numTelefonico: { pattern: /^\d{10}$/, mensaje: "El teléfono debe contener exactamente 10 números." },
   codigoPostal: { pattern: /^\d{5}$/, mensaje: "El código postal debe contener exactamente 5 números." },
   user: { pattern: /^[A-Za-z0-9._-]{4,20}$/, mensaje: "Usa de 4 a 20 caracteres: letras, números, punto, guion o guion bajo." },
   rfc: { pattern: /^[A-Za-zÑ&]{3,4}\d{6}[A-Za-z0-9]{3}$/, mensaje: "Escribe un RFC válido de 12 o 13 caracteres." }
@@ -52,6 +51,21 @@ function validarCampo(campo) {
     return false;
   }
   if (!valor) return true;
+
+  if (campo.id === "numTelefonico") {
+    const selectorPais = document.getElementById("codigoPaisTelefono");
+    const opcionPais = selectorPais?.selectedOptions[0];
+    const minimo = Number(opcionPais?.dataset.min || 1);
+    const maximo = Number(opcionPais?.dataset.max || 15);
+    if (!/^\\d+$/.test(valor) || valor.length < minimo || valor.length > maximo) {
+      const detalle = minimo === maximo
+        ? "El número de " + opcionPais.textContent.trim() + " debe contener exactamente " + minimo + " dígitos."
+        : "El número de " + opcionPais.textContent.trim() + " debe contener entre " + minimo + " y " + maximo + " dígitos.";
+      mostrarError(campo, detalle);
+      return false;
+    }
+    return true;
+  }
 
   const regla = reglas[campo.id];
   if (regla && !regla.pattern.test(valor)) {
@@ -102,6 +116,42 @@ function aplicarSoloNumeros(campo) {
 }
 
 document.querySelectorAll("[data-solo-numeros]").forEach(aplicarSoloNumeros);
+
+const selectorPaisTelefono = document.getElementById("codigoPaisTelefono");
+const campoTelefono = document.getElementById("numTelefonico");
+const prefijoPaisTelefono = document.getElementById("prefijoPaisTelefono");
+const ayudaTelefono = document.getElementById("ayudaTelefono");
+
+function actualizarTelefonoSegunPais() {
+  if (!selectorPaisTelefono || !campoTelefono) return;
+  const opcion = selectorPaisTelefono.selectedOptions[0];
+  const prefijo = opcion.dataset.prefijo || "";
+  const minimo = Number(opcion.dataset.min || 1);
+  const maximo = Number(opcion.dataset.max || 15);
+
+  if (prefijoPaisTelefono) prefijoPaisTelefono.textContent = prefijo;
+  campoTelefono.minLength = minimo;
+  campoTelefono.maxLength = maximo;
+  campoTelefono.placeholder = minimo === maximo
+    ? minimo + " dígitos"
+    : minimo + " a " + maximo + " dígitos";
+  if (ayudaTelefono) {
+    ayudaTelefono.textContent = minimo === maximo
+      ? opcion.textContent.trim() + ": escribe " + minimo + " dígitos después de " + prefijo + "."
+      : opcion.textContent.trim() + ": escribe entre " + minimo + " y " + maximo + " dígitos después de " + prefijo + ".";
+  }
+
+  if (campoTelefono.value.length > maximo) {
+    campoTelefono.value = campoTelefono.value.slice(0, maximo);
+  }
+  limpiarError(campoTelefono);
+  campoTelefono.setAttribute("pattern", "[0-9]{" + minimo + "," + maximo + "}");
+}
+
+if (selectorPaisTelefono) {
+  selectorPaisTelefono.addEventListener("change", actualizarTelefonoSegunPais);
+  actualizarTelefonoSegunPais();
+}
 
 function actualizarEdad() {
   if (!fechaNacimiento || !resultadoEdad) return;
