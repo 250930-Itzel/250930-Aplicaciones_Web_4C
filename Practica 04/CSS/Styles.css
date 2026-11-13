@@ -950,3 +950,57 @@ input:required, select:required, textarea:required {
   #registroForm { padding: 12px; }
   .extras-workspace { padding: 12px; }
 }
+
+
+/* Captura internacional del número telefónico */
+.telefono-internacional {
+  display: grid;
+  grid-template-columns: minmax(145px, .85fr) minmax(190px, 1.4fr);
+  gap: 10px;
+  align-items: stretch;
+  margin: 7px 0 4px;
+}
+.telefono-internacional select {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+}
+.telefono-numero-grupo {
+  display: flex;
+  min-width: 0;
+  align-items: stretch;
+}
+.prefijo-telefono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 66px;
+  padding: 0 12px;
+  border: 1px solid #e4cfe5;
+  border-right: 0;
+  border-radius: 12px 0 0 12px;
+  background: #f3e7f4;
+  color: #694a75;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.telefono-numero-grupo input[type="tel"] {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  border-radius: 0 12px 12px 0;
+}
+.ayuda-telefono {
+  display: block;
+  margin: 5px 0 10px;
+  color: #8b6d91;
+  font-size: .84rem;
+}
+@media (max-width: 520px) {
+  .telefono-internacional {
+    grid-template-columns: 1fr;
+  }
+  .telefono-internacional select {
+    width: 100%;
+  }
+}
