@@ -130,8 +130,45 @@
             <input type="email" id="email" placeholder="Ingrese su correo electrónico" required>
             <br>
         
-            <label for="numTelefonico">Numero Teléfonico:</label>
-            <input type="tel" id="numTelefonico" name="telefono" placeholder="10 dígitos" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" minlength="10" data-solo-numeros required>
+            <label for="codigoPaisTelefono">Número telefónico:</label>
+            <div class="telefono-internacional">
+                <select id="codigoPaisTelefono" name="codigoPaisTelefono" aria-label="Selecciona el país del teléfono" required>
+                    <option value="MX" data-prefijo="+52" data-min="10" data-max="10" selected>México</option>
+                    <option value="ES" data-prefijo="+34" data-min="9" data-max="9">España</option>
+                    <option value="US" data-prefijo="+1" data-min="10" data-max="10">Estados Unidos</option>
+                    <option value="CA" data-prefijo="+1" data-min="10" data-max="10">Canadá</option>
+                    <option value="GB" data-prefijo="+44" data-min="10" data-max="10">Reino Unido</option>
+                    <option value="FR" data-prefijo="+33" data-min="9" data-max="9">Francia</option>
+                    <option value="DE" data-prefijo="+49" data-min="5" data-max="13">Alemania</option>
+                    <option value="IT" data-prefijo="+39" data-min="6" data-max="11">Italia</option>
+                    <option value="PT" data-prefijo="+351" data-min="9" data-max="9">Portugal</option>
+                    <option value="NL" data-prefijo="+31" data-min="9" data-max="9">Países Bajos</option>
+                    <option value="CH" data-prefijo="+41" data-min="9" data-max="9">Suiza</option>
+                    <option value="AR" data-prefijo="+54" data-min="10" data-max="10">Argentina</option>
+                    <option value="BR" data-prefijo="+55" data-min="10" data-max="11">Brasil</option>
+                    <option value="CL" data-prefijo="+56" data-min="9" data-max="9">Chile</option>
+                    <option value="CO" data-prefijo="+57" data-min="10" data-max="10">Colombia</option>
+                    <option value="PE" data-prefijo="+51" data-min="9" data-max="9">Perú</option>
+                    <option value="VE" data-prefijo="+58" data-min="10" data-max="10">Venezuela</option>
+                    <option value="EC" data-prefijo="+593" data-min="9" data-max="9">Ecuador</option>
+                    <option value="UY" data-prefijo="+598" data-min="8" data-max="8">Uruguay</option>
+                    <option value="PY" data-prefijo="+595" data-min="9" data-max="9">Paraguay</option>
+                    <option value="BO" data-prefijo="+591" data-min="8" data-max="8">Bolivia</option>
+                    <option value="CR" data-prefijo="+506" data-min="8" data-max="8">Costa Rica</option>
+                    <option value="PA" data-prefijo="+507" data-min="8" data-max="8">Panamá</option>
+                    <option value="DO" data-prefijo="+1" data-min="10" data-max="10">República Dominicana</option>
+                    <option value="JP" data-prefijo="+81" data-min="10" data-max="10">Japón</option>
+                    <option value="CN" data-prefijo="+86" data-min="11" data-max="11">China</option>
+                    <option value="IN" data-prefijo="+91" data-min="10" data-max="10">India</option>
+                    <option value="AU" data-prefijo="+61" data-min="9" data-max="9">Australia</option>
+                    <option value="NZ" data-prefijo="+64" data-min="8" data-max="10">Nueva Zelanda</option>
+                </select>
+                <div class="telefono-numero-grupo">
+                    <span id="prefijoPaisTelefono" class="prefijo-telefono" aria-label="Prefijo internacional">+52</span>
+                    <input type="tel" id="numTelefonico" name="telefono" placeholder="10 dígitos" inputmode="numeric" autocomplete="tel-national" maxlength="10" minlength="10" data-solo-numeros aria-describedby="ayudaTelefono" required>
+                </div>
+            </div>
+            <small id="ayudaTelefono" class="ayuda-telefono">México: escribe 10 dígitos después de +52.</small>
             <br>
 
             <label for="horarioContacto">Favor de contactar en el horario establecido:</label>
