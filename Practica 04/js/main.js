@@ -265,3 +265,68 @@ if (formulario) {
 }
 
 if (fechaNacimiento) fechaNacimiento.addEventListener("change", actualizarEdad);
+
+/* Generación automática de códigos QR para los perfiles sociales.
+   Cada código se crea con el enlace que la persona escribe en el formulario. */
+function configurarCodigoQR(idCampo, idContenedor, idEstado, mensajeVacio) {
+  const campo = document.getElementById(idCampo);
+  const contenedor = document.getElementById(idContenedor);
+  const estado = document.getElementById(idEstado);
+  if (!campo || !contenedor || !estado) return;
+
+  let ultimoEnlace = "";
+
+  function actualizarQR() {
+    const enlace = campo.value.trim();
+    contenedor.innerHTML = "";
+    ultimoEnlace = "";
+
+    if (!enlace) {
+      estado.textContent = mensajeVacio;
+      return;
+    }
+
+    let url;
+    try {
+      url = new URL(enlace);
+    } catch {
+      estado.textContent = "Escribe un enlace completo y válido (debe comenzar con https://).";
+      return;
+    }
+
+    if (url.protocol !== "https:" && url.protocol !== "http:") {
+      estado.textContent = "El enlace debe comenzar con https:// o http://.";
+      return;
+    }
+
+    if (idCampo === "urlWhatsApp" && !/(^|\\.)wa\\.me$/i.test(url.hostname) && !/whatsapp\\.com$/i.test(url.hostname)) {
+      estado.textContent = "Para WhatsApp utiliza un enlace https://wa.me/...";
+      return;
+    }
+
+    if (typeof QRCode === "undefined") {
+      estado.textContent = "No se pudo cargar el generador QR. Revisa tu conexión a internet.";
+      return;
+    }
+
+    new QRCode(contenedor, {
+      text: url.href,
+      width: 150,
+      height: 150,
+      colorDark: "#392d42",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.H
+    });
+    ultimoEnlace = url.href;
+    estado.textContent = "QR listo. Escanéalo para abrir este perfil.";
+  }
+
+  campo.addEventListener("input", actualizarQR);
+  campo.addEventListener("change", actualizarQR);
+  actualizarQR();
+}
+
+configurarCodigoQR("urlFacebook", "qrFacebook", "estadoQrFacebook", "El QR aparecerá cuando ingreses un enlace válido.");
+configurarCodigoQR("urlLinkedin", "qrLinkedin", "estadoQrLinkedin", "El QR aparecerá cuando ingreses un enlace válido.");
+configurarCodigoQR("urlWhatsApp", "qrWhatsApp", "estadoQrWhatsApp", "Pega tu enlace de WhatsApp (wa.me) para generar el QR.");
+
