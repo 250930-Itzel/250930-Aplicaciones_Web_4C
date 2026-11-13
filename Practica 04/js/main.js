@@ -274,13 +274,9 @@ function configurarCodigoQR(idCampo, idContenedor, idEstado, mensajeVacio) {
   const estado = document.getElementById(idEstado);
   if (!campo || !contenedor || !estado) return;
 
-  let ultimoEnlace = "";
-
   function actualizarQR() {
     const enlace = campo.value.trim();
     contenedor.innerHTML = "";
-    ultimoEnlace = "";
-
     if (!enlace) {
       estado.textContent = mensajeVacio;
       return;
@@ -317,7 +313,6 @@ function configurarCodigoQR(idCampo, idContenedor, idEstado, mensajeVacio) {
       colorLight: "#ffffff",
       correctLevel: QRCode.CorrectLevel.H
     });
-    ultimoEnlace = url.href;
     estado.textContent = "QR listo. Escanéalo para abrir este perfil.";
   }
 
