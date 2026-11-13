@@ -742,3 +742,65 @@ input:required, select:required, textarea:required {
   }
   .icono-paso svg { width: 18px; height: 18px; }
 }
+
+
+/* Tarjetas para los códigos QR de redes sociales */
+.instruccion-qr {
+  color: #76677e;
+  margin: 4px 0 16px;
+  font-size: .92rem;
+}
+.redes-sociales-qr {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+.red-social-card {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #ead8ed;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #fffaff, #fbf1fa);
+  box-shadow: 0 7px 18px rgba(82, 54, 94, .07);
+}
+.red-social-card label {
+  display: block;
+  margin-top: 0;
+  color: #694a75;
+  font-weight: 700;
+}
+.qr-contenedor {
+  display: flex;
+  min-height: 185px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px dashed #d9c4df;
+  border-radius: 12px;
+  background: #fff;
+}
+.codigo-qr {
+  display: flex;
+  min-height: 150px;
+  align-items: center;
+  justify-content: center;
+}
+.codigo-qr img, .codigo-qr canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+.estado-qr {
+  color: #8b7a91;
+  font-size: .8rem;
+  text-align: center;
+  line-height: 1.35;
+}
+@media (max-width: 520px) {
+  .redes-sociales-qr { grid-template-columns: 1fr; }
+  .red-social-card { padding: 14px; }
+}
