@@ -20,6 +20,56 @@
     </header>
 
     <main>
+        <section id="extrasDashboard" class="extras-dashboard" aria-labelledby="tituloExtras">
+            <div class="extras-encabezado">
+                <div>
+                    <p class="eyebrow">ME CAGEST · PANEL DE ACCESOS</p>
+                    <h2 id="tituloExtras">Otras funciones</h2>
+                    <p>Accede a las herramientas adicionales sin mezclarlas con el registro de usuario.</p>
+                </div>
+            </div>
+            <div class="extras-tarjetas">
+                <button type="button" class="extra-tarjeta" data-extra-target="0">
+                    <span class="extra-icono" aria-hidden="true">📅</span>
+                    <span class="extra-titulo">Visualización de citas</span>
+                    <span class="extra-descripcion">Consulta las citas por mes o semana.</span>
+                </button>
+                <button type="button" class="extra-tarjeta" data-extra-target="1">
+                    <span class="extra-icono" aria-hidden="true">🎨</span>
+                    <span class="extra-titulo">Configuración de interfaz</span>
+                    <span class="extra-descripcion">Personaliza colores y sonido.</span>
+                </button>
+                <button type="button" class="extra-tarjeta" data-extra-target="2">
+                    <span class="extra-icono" aria-hidden="true">👤</span>
+                    <span class="extra-titulo">Mi cuenta y perfil</span>
+                    <span class="extra-descripcion">Administra tu fotografía y perfil.</span>
+                </button>
+                <button type="button" class="extra-tarjeta" data-extra-target="3">
+                    <span class="extra-icono" aria-hidden="true">🧾</span>
+                    <span class="extra-titulo">Datos fiscales</span>
+                    <span class="extra-descripcion">Consulta y agrega tus datos fiscales.</span>
+                </button>
+                <button type="button" class="extra-tarjeta" data-extra-target="4">
+                    <span class="extra-icono" aria-hidden="true">🗓️</span>
+                    <span class="extra-titulo">Solicitar una cita</span>
+                    <span class="extra-descripcion">Elige fecha, sucursal y descripción.</span>
+                </button>
+                <button type="button" class="extra-tarjeta" data-extra-target="5">
+                    <span class="extra-icono" aria-hidden="true">🧰</span>
+                    <span class="extra-titulo">Solicitar herramientas</span>
+                    <span class="extra-descripcion">Solicita piezas o herramientas mecánicas.</span>
+                </button>
+            </div>
+        </section>
+
+        <section id="extrasWorkspace" class="extras-workspace" aria-live="polite" hidden>
+            <div class="extras-workspace-header">
+                <p class="eyebrow">OTRAS FUNCIONES</p>
+                <p id="estadoExtras">Selecciona una función para comenzar.</p>
+            </div>
+            <div id="extrasContenido"></div>
+        </section>
+
         <form id="registroForm" method="post" novalidate>
             <div id="navegacionSecciones" class="navegacion-secciones" aria-label="Secciones del formulario"></div>
             <p id="progresoFormulario" class="progreso-formulario" aria-live="polite">Sección 1 de 5</p>
@@ -186,11 +236,14 @@
 
         <br>
         <br>
+        <section class="registro-separador" aria-label="Registro de usuario">
+            <h2>Registro de usuario</h2>
+            <p>Completa los cinco pasos para solicitar tu cuenta.</p>
+        </section>
+        <div id="registroContenedor">
+        <form id="extrasForm" class="extras-form">
 
-        <h4>Esto son para futuro uso,  no son parte del Formulario De Registro Usuario</h4>
-        <form> <!----Elementos input que usaremos más adelante---->
-
-            <fieldset>
+            <fieldset data-extra-section hidden>
                 <legend>Vizualización De Citas Por Mes:</legend>
                 <label for="mesCitas">Porfavor, elige el filtro:</label>
 
@@ -202,7 +255,7 @@
                 <input type="month">
                 <br>
                 <input type="week" disabled>
-                <button id="verCitas">Ver Citas</button>
+                <button type="button" id="verCitas">Ver Citas</button>
 
                 <br>
                 <h4>Las citas programadas para el mes seleccionado son:</h4>
@@ -301,7 +354,7 @@
                 
                 </table>
             </fieldset>
-            <fieldset> 
+            <fieldset data-extra-section hidden> 
 
                 <legend>Configuraciones De La Interfaz :</legend>
                 <label for="fontColor">Color de la Fuente</label>
@@ -314,13 +367,13 @@
                 
                 <label for="soundsVolume">Volumen de reproduccioón de sonidos</label>
                 <input type="range" id="soundsVolume" min="0" max="100" value="80">
-                <button id="muteSounds">Silencias Sonidos</button>
+                <button type="button" id="muteSounds">Silencias Sonidos</button>
 
                 
             </fieldset>
 
             <!---->
-            <fieldset> 
+            <fieldset data-extra-section hidden> 
 
         <legend>Configuración de Mi cuenta/Perfil: </legend>
         <label for ="userPhoto">Foto de Perfil:</label>
@@ -331,7 +384,7 @@
         <input type="hidden" id="userId" value="25XXXX">
     </fieldset>
 
-    <fieldset>
+    <fieldset data-extra-section hidden>
         <legend>Datos fiscales:</legend>
         <label for="rfc">Registro Federal de Causantes (RFC): </label>
         <input type="text" id="rfc" maxlength="13" minlength="12" pattern="[A-Za-z0-9]{12,13}" placeholder="RAHMXXXXXX">
@@ -341,7 +394,7 @@
         <input tipe="hidden" id="userId" value="25XXXX">
     </fieldset>
 
-    <fieldset>
+    <fieldset data-extra-section hidden>
         <legend>Solicitud de cita</legend>
         <label for="dateAppoiment"> Fecha de la cita: </label>
         <input type="datetime-local" id="dateAppoiment">
@@ -365,7 +418,7 @@
         <br>
     </fieldset>
 
-    <fieldset>
+    <fieldset data-extra-section hidden>
         <legend>Solicitud de Herramientas para Servicio Mécanico: </legend>
         <label for="toolName">Elige lapieza: </label>
         <input type="radio" id="resourceRefaction" name="resourceCategory" value="refaccion">Refacción
@@ -404,7 +457,7 @@
 
         <label for="toolQuantity">Cantidad</label>
         <input type="number" id="toolQuantity" min="1" max="10" inputmode="numeric" data-solo-numeros required>
-        <button id="requestTool">Solicitar Herramienta</button>
+        <button type="button" id="requestTool">Solicitar Herramienta</button>
         <br>
 
         <table style="border: 1px solid black">
@@ -457,7 +510,8 @@
         </tr>
     </fieldset>
 
-        </form>    
+                </form>
+        </div>
     </main>
 </body>
 </html>
