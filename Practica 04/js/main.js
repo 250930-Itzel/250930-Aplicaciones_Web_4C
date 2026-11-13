@@ -325,3 +325,55 @@ configurarCodigoQR("urlFacebook", "qrFacebook", "estadoQrFacebook", "El QR apare
 configurarCodigoQR("urlLinkedin", "qrLinkedin", "estadoQrLinkedin", "El QR aparecerá cuando ingreses un enlace válido.");
 configurarCodigoQR("urlWhatsApp", "qrWhatsApp", "estadoQrWhatsApp", "Pega tu enlace de WhatsApp (wa.me) para generar el QR.");
 
+/* Panel independiente de funciones adicionales.
+   Cada tarjeta abre únicamente su propio recuadro, sin mostrar las demás secciones. */
+(function configurarFuncionesAdicionales() {
+  const formularioExtras = document.getElementById("extrasForm");
+  const dashboard = document.getElementById("extrasDashboard");
+  const workspace = document.getElementById("extrasWorkspace");
+  const contenedor = document.getElementById("extrasContenido");
+  const estado = document.getElementById("estadoExtras");
+  if (!formularioExtras || !dashboard || !workspace || !contenedor) return;
+
+  const secciones = Array.from(formularioExtras.querySelectorAll("[data-extra-section]"));
+  const tarjetas = Array.from(dashboard.querySelectorAll("[data-extra-target]"));
+
+  secciones.forEach((seccion, indice) => {
+    seccion.hidden = true;
+    seccion.dataset.extraIndex = String(indice);
+    const botonVolver = document.createElement("button");
+    botonVolver.type = "button";
+    botonVolver.className = "volver-extras";
+    botonVolver.textContent = "← Volver a otras funciones";
+    botonVolver.addEventListener("click", () => {
+      workspace.hidden = true;
+      dashboard.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    seccion.appendChild(botonVolver);
+  });
+
+  function abrirFuncion(indice) {
+    const seccion = secciones[indice];
+    if (!seccion) return;
+
+    contenedor.replaceChildren(seccion);
+    secciones.forEach((item) => { item.hidden = item !== seccion; });
+    workspace.hidden = false;
+    estado.textContent = seccion.querySelector("legend")?.textContent.trim() || "Función seleccionada";
+    tarjetas.forEach((tarjeta, i) => {
+      const activa = Number(tarjeta.dataset.extraTarget) === indice;
+      tarjeta.classList.toggle("seleccionada", activa);
+      tarjeta.setAttribute("aria-pressed", activa ? "true" : "false");
+    });
+    workspace.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  tarjetas.forEach((tarjeta) => {
+    tarjeta.addEventListener("click", () => abrirFuncion(Number(tarjeta.dataset.extraTarget)));
+    tarjeta.setAttribute("aria-pressed", "false");
+  });
+
+  // Los controles adicionales permanecen ocultos hasta elegir una tarjeta.
+  workspace.hidden = true;
+})();
+
