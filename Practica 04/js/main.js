@@ -57,7 +57,7 @@ function validarCampo(campo) {
     const opcionPais = selectorPais?.selectedOptions[0];
     const minimo = Number(opcionPais?.dataset.min || 1);
     const maximo = Number(opcionPais?.dataset.max || 15);
-    if (!/^\\d+$/.test(valor) || valor.length < minimo || valor.length > maximo) {
+    if (!/^\d+$/.test(valor) || valor.length < minimo || valor.length > maximo) {
       const detalle = minimo === maximo
         ? "El número de " + opcionPais.textContent.trim() + " debe contener exactamente " + minimo + " dígitos."
         : "El número de " + opcionPais.textContent.trim() + " debe contener entre " + minimo + " y " + maximo + " dígitos.";
@@ -107,7 +107,7 @@ function aplicarSoloNumeros(campo) {
   if (!campo) return;
   const limpiar = () => {
     const max = Number(campo.getAttribute("maxlength")) || Infinity;
-    const valor = campo.value.replace(/\\D/g, "").slice(0, max);
+    const valor = campo.value.replace(/\D/g, "").slice(0, max);
     if (campo.value !== valor) campo.value = valor;
   };
   campo.addEventListener("input", limpiar);
