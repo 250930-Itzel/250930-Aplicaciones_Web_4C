@@ -295,7 +295,7 @@ function configurarCodigoQR(idCampo, idContenedor, idEstado, mensajeVacio) {
       return;
     }
 
-    if (idCampo === "urlWhatsApp" && !/(^|\\.)wa\\.me$/i.test(url.hostname) && !/whatsapp\\.com$/i.test(url.hostname)) {
+    if (idCampo === "urlWhatsApp" && !/(^|\.)wa\.me$/i.test(url.hostname) && !/whatsapp\.com$/i.test(url.hostname)) {
       estado.textContent = "Para WhatsApp utiliza un enlace https://wa.me/...";
       return;
     }
