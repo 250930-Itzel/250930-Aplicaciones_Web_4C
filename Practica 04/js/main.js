@@ -88,6 +88,21 @@ function validarCampo(campo) {
   return true;
 }
 
+// Restringe los campos marcados a dígitos desde la captura y al pegar.
+function aplicarSoloNumeros(campo) {
+  if (!campo) return;
+  const limpiar = () => {
+    const max = Number(campo.getAttribute("maxlength")) || Infinity;
+    const valor = campo.value.replace(/\\D/g, "").slice(0, max);
+    if (campo.value !== valor) campo.value = valor;
+  };
+  campo.addEventListener("input", limpiar);
+  campo.addEventListener("paste", () => requestAnimationFrame(limpiar));
+  campo.addEventListener("drop", () => requestAnimationFrame(limpiar));
+}
+
+document.querySelectorAll("[data-solo-numeros]").forEach(aplicarSoloNumeros);
+
 function actualizarEdad() {
   if (!fechaNacimiento || !resultadoEdad) return;
   resultadoEdad.classList.remove("edad-estado--mayor", "edad-estado--menor", "edad-estado--error");
