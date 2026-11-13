@@ -7,6 +7,7 @@
     
     <link rel="stylesheet" href="/Practica 04/CSS/Styles.css">
     <!--VINCULACIÓN DE JAVASCRIPT -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="/Practica 04/js/main.js" defer></script>
 
 
@@ -85,20 +86,36 @@
             <br>
 
             <h4>Redes Sociales</h4>
+            <p class="instruccion-qr">Escribe el enlace de cada uno de tus perfiles. El código QR se generará automáticamente para que pueda escanearse desde un celular.</p>
 
-            <input type="checkbox" id="socialesNetwork">
-            <label for="urlFacebook">Facebook:</label>
-            <input type="url" placeholder="http://www.facebook.com/UserName">
-            <br>
+            <div class="redes-sociales-qr">
+                <section class="red-social-card">
+                    <label for="urlFacebook">Facebook:</label>
+                    <input type="url" id="urlFacebook" name="urlFacebook" placeholder="https://www.facebook.com/tu.perfil" autocomplete="url">
+                    <div class="qr-contenedor">
+                        <div id="qrFacebook" class="codigo-qr" aria-label="Código QR de Facebook"></div>
+                        <p id="estadoQrFacebook" class="estado-qr">El QR aparecerá cuando ingreses un enlace válido.</p>
+                    </div>
+                </section>
 
-            <input type="checkbox" id="socialesNetwork">
-            <label for="urlLinkedn">Linkedn:</label>
-            <input type="url" placeholder="http://www.linkdn.com/UserName">
-            <br>
+                <section class="red-social-card">
+                    <label for="urlLinkedin">LinkedIn:</label>
+                    <input type="url" id="urlLinkedin" name="urlLinkedin" placeholder="https://www.linkedin.com/in/tu-perfil" autocomplete="url">
+                    <div class="qr-contenedor">
+                        <div id="qrLinkedin" class="codigo-qr" aria-label="Código QR de LinkedIn"></div>
+                        <p id="estadoQrLinkedin" class="estado-qr">El QR aparecerá cuando ingreses un enlace válido.</p>
+                    </div>
+                </section>
 
-            <input type="checkbox" id="socialesNetwork">            
-            <label for="urlFacebook">WhatsApp: (Carga QR)</label>
-            <input type="file" id="whatsAppQR" accept="image/*">
+                <section class="red-social-card">
+                    <label for="urlWhatsApp">WhatsApp:</label>
+                    <input type="url" id="urlWhatsApp" name="urlWhatsApp" placeholder="https://wa.me/521234567890" autocomplete="url">
+                    <div class="qr-contenedor">
+                        <div id="qrWhatsApp" class="codigo-qr" aria-label="Código QR de WhatsApp"></div>
+                        <p id="estadoQrWhatsApp" class="estado-qr">Pega tu enlace de WhatsApp (wa.me) para generar el QR.</p>
+                    </div>
+                </section>
+            </div>
 
 
             </fieldset>
