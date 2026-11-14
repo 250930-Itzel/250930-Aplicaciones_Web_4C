@@ -10,7 +10,25 @@ document.addEventListener("DOMContentLoaded", () => {
   function show(panels, step, progressId) {
     panels.forEach((panel,index) => panel.hidden = index !== step);
     const progress=$(progressId);
-    if(progress) progress.textContent = "Paso " + (step+1) + " de " + panels.length;
+    if(progress) {
+      if(progressId === "wizardProgress") {
+        progress.style.width = (panels.length > 1 ? (step / (panels.length - 1)) * 100 : 0) + "%";
+      } else {
+        progress.textContent = "Paso " + (step+1) + " de " + panels.length;
+      }
+    }
+    if(panels === regPanels) {
+      many("#registroWizard .stepper-item").forEach((item,index) => {
+        item.classList.toggle("is-active", index === step);
+        item.classList.toggle("is-complete", index < step);
+        item.classList.toggle("is-clickable", index <= step);
+        const button=item.querySelector(".step-btn");
+        if(button) {
+          button.setAttribute("aria-current", index === step ? "step" : "false");
+          button.disabled = index > step;
+        }
+      });
+    }
   }
   function switchView(view) {
     if($("vistaRegistro")) $("vistaRegistro").hidden = view !== "registro";
@@ -22,6 +40,15 @@ document.addEventListener("DOMContentLoaded", () => {
   $("btnVistaRegistro")?.addEventListener("click",()=>switchView("registro"));
   $("btnVistaPractica")?.addEventListener("click",()=>switchView("practica"));
   show(regPanels,0,"wizardProgress"); show(pracPanels,0,"practicaProgress");
+
+  many("#registroWizard .stepper-item .step-btn").forEach((button,index) => {
+    button.addEventListener("click", () => {
+      if(index <= regStep) {
+        regStep=index;
+        show(regPanels,regStep,"wizardProgress");
+      }
+    });
+  });
 
   function validate(panel) {
     let valid=true;
