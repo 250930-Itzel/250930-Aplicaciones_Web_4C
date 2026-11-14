@@ -1026,3 +1026,147 @@ h2,h3,h4{color:var(--mg-primary-dark)}label{display:block;margin:13px 0 6px;font
 .profile-avatar,.perfil-avatar{width:104px;height:104px;object-fit:cover;border-radius:50%;border:4px solid #e7eef2;background:#fff}.qr-card,.qr-preview,.social-card{padding:16px;border:1px solid var(--mg-border);border-radius:12px;background:#f9fbfc;margin:12px 0}table{width:100%;border-collapse:collapse;margin:14px 0;background:#fff}th,td{padding:11px;border:1px solid var(--mg-border);text-align:left;vertical-align:top}th{background:#eaf1f5;color:var(--mg-primary-dark)}tbody tr:nth-child(even){background:#f8fafb}
 .error-message,.field-error,.validation-error{display:block;color:#b42318;font-size:.88rem;margin-top:4px}input.invalid,select.invalid,textarea.invalid{border-color:#c93636!important;background:#fff8f7!important}[hidden]{display:none!important}
 @media(max-width:700px){main{width:calc(100% - 20px);margin-top:14px}.form-grid,.grid-fields,.two-columns{grid-template-columns:1fr}#vistaRegistro,#vistaPractica{padding:16px}.wizard-actions{align-items:stretch}.wizard-actions>button,.actions-right button{flex:1}.topbar-tools>*{flex:1 1 145px}}
+
+
+/* ==========================================================================
+   8. INDICADOR CIRCULAR DE LAS CUATRO SECCIONES DEL REGISTRO
+   Diseño inspirado en la referencia: círculos, iconos y línea de progreso.
+   ========================================================================== */
+#registroWizard .stepper {
+  position: relative;
+  display: block;
+  margin: 4px 0 28px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+#registroWizard .stepper-list {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#registroWizard .stepper-track {
+  position: absolute;
+  z-index: 0;
+  top: 21px;
+  left: 12.5%;
+  right: 12.5%;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #334155;
+}
+#registroWizard .stepper-fill {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #2563eb, #22d3ee);
+  transition: width .35s ease;
+}
+#registroWizard .stepper-item {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+#registroWizard .stepper-item .step-btn {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0 3px;
+  color: #cbd5e1;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: default;
+  transition: color .25s ease;
+}
+#registroWizard .stepper-item .step-circle {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border: 3px solid #334155;
+  border-radius: 50%;
+  background: #0f172a;
+  color: #dbeafe;
+  transition: all .3s ease;
+}
+#registroWizard .stepper-item .step-icon {
+  font-size: 21px;
+  line-height: 1;
+}
+#registroWizard .stepper-item .step-num {
+  position: absolute;
+  right: -7px;
+  bottom: -5px;
+  display: grid;
+  place-items: center;
+  min-width: 21px;
+  height: 19px;
+  padding: 0 4px;
+  border: 1px solid #475569;
+  border-radius: 999px;
+  background: #1e293b;
+  color: #e2e8f0;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+}
+#registroWizard .stepper-item .step-label {
+  display: block;
+  max-width: 145px;
+  color: #cbd5e1;
+  font-size: .83rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+#registroWizard .stepper-item.is-active .step-circle {
+  border-color: #67e8f9;
+  background: #2563eb;
+  color: #fff;
+  box-shadow: 0 0 0 4px rgba(103,232,249,.12), 0 0 18px rgba(56,189,248,.35);
+}
+#registroWizard .stepper-item.is-active .step-label,
+#registroWizard .stepper-item.is-complete .step-label {
+  color: #67e8f9;
+}
+#registroWizard .stepper-item.is-complete .step-circle {
+  border-color: #67e8f9;
+  background: #164e63;
+  color: #a5f3fc;
+}
+#registroWizard .stepper-item.is-complete .step-num {
+  border-color: #67e8f9;
+  background: #164e63;
+  color: #cffafe;
+}
+#registroWizard .stepper-item.is-clickable .step-btn {
+  cursor: pointer;
+}
+#registroWizard .stepper-item.is-clickable .step-btn:hover .step-circle {
+  border-color: #67e8f9;
+  transform: translateY(-2px);
+}
+@media (max-width: 600px) {
+  #registroWizard .stepper-track { top: 17px; left: 12%; right: 12%; height: 3px; }
+  #registroWizard .stepper-item .step-circle { width: 36px; height: 36px; flex-basis: 36px; }
+  #registroWizard .stepper-item .step-icon { font-size: 18px; }
+  #registroWizard .stepper-item .step-label { font-size: .68rem; max-width: 82px; }
+  #registroWizard .stepper-item .step-num { min-width: 18px; height: 16px; font-size: 9px; }
+}
