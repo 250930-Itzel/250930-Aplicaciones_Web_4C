@@ -1170,3 +1170,265 @@ h2,h3,h4{color:var(--mg-primary-dark)}label{display:block;margin:13px 0 6px;font
   #registroWizard .stepper-item .step-label { font-size: .68rem; max-width: 82px; }
   #registroWizard .stepper-item .step-num { min-width: 18px; height: 16px; font-size: 9px; }
 }
+
+
+/* ==========================================================================
+   9. TEMA KUROMI - PALETA UNIFICADA PARA TODO MECAGEST
+   Ciruela, negro suave, lavanda y rosa. Detalles delicados inspirados
+   en Kuromi sin recargar el formulario ni afectar su funcionalidad.
+   ========================================================================== */
+:root {
+  --mg-primary: #76508f;
+  --mg-primary-dark: #493052;
+  --mg-accent: #e7a3cc;
+  --mg-bg: #f5eff9;
+  --mg-card: #fffaff;
+  --mg-text: #3f3048;
+  --mg-muted: #806f89;
+  --mg-border: #e6d5ec;
+  --mg-radius: 20px;
+
+  --kuromi-plum: #38263f;
+  --kuromi-purple: #76508f;
+  --kuromi-lilac: #d9c4eb;
+  --kuromi-pink: #f0b8d8;
+  --kuromi-soft: #fff4fb;
+  --kuromi-ink: #3f3048;
+}
+
+html { background: #f5eff9; }
+body {
+  color: var(--kuromi-ink);
+  background:
+    radial-gradient(circle at 7% 8%, rgba(240,184,216,.42), transparent 22rem),
+    radial-gradient(circle at 94% 16%, rgba(217,196,235,.55), transparent 25rem),
+    linear-gradient(145deg,#f8f2fb 0%,#f1e9f7 52%,#fff5fa 100%);
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+header, .main-header {
+  position: relative;
+  overflow: hidden;
+  color: #fff7fc;
+  background: linear-gradient(130deg,#302139 0%,#51345f 55%,#80588f 100%);
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 25px;
+  box-shadow: 0 15px 38px rgba(63,43,75,.2);
+}
+header::after, .main-header::after {
+  content: "☠  ✦";
+  position: absolute;
+  right: 22px;
+  bottom: 13px;
+  color: #f4c4df;
+  font-size: 1.05rem;
+  letter-spacing: .35rem;
+  opacity: .78;
+  pointer-events: none;
+}
+header h1, .main-header h1 { color: #ffd7eb; text-shadow: 0 2px 14px #f0b8d844; }
+header h2, .main-header h2 { color: #eadcf2; }
+header p, .main-header p { color: #fff0f8; }
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 10px;
+}
+.header-logo {
+  max-width: 112px;
+  max-height: 112px;
+  object-fit: contain;
+  border: 3px solid #f0b8d8;
+  border-radius: 50%;
+  background: #fff7fc;
+  box-shadow: 0 0 0 6px rgba(240,184,216,.13), 0 8px 22px #160d1c55;
+}
+main { color: var(--kuromi-ink); }
+
+.topbar-tools { gap: 10px; }
+button, .btn-primary, .btn-outline, input[type=submit], input[type=reset] {
+  border-radius: 999px;
+  font-weight: 700;
+  transition: background .2s ease, color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+button, .btn-primary, input[type=submit] {
+  color: #fffaff;
+  background: linear-gradient(125deg,#76508f,#a36ca6);
+  box-shadow: 0 5px 14px rgba(118,80,143,.18);
+}
+button:hover, .btn-primary:hover, input[type=submit]:hover {
+  color: #fff;
+  background: linear-gradient(125deg,#5b3b70,#d17eae);
+  box-shadow: 0 8px 18px rgba(118,80,143,.24);
+}
+.btn-outline, input[type=reset] {
+  color: #654779;
+  background: #fff8fd;
+  border: 1px solid #ddc6e7;
+}
+.btn-outline:hover, input[type=reset]:hover {
+  color: #493052;
+  background: #f9e5f2;
+  border-color: #d89bc5;
+}
+#panelInterfaz, #panelPerfil, .wizard-card, .panel-formulario, .form-card,
+.wizard-panel, .profile-card, .interface-card, #vistaRegistro, #vistaPractica {
+  color: var(--kuromi-ink);
+  background: rgba(255,250,255,.94);
+  border: 1px solid var(--mg-border);
+  border-radius: 22px;
+  box-shadow: 0 12px 30px rgba(73,48,82,.09);
+}
+.wizard-card { position: relative; }
+.wizard-card::before {
+  content: "✦";
+  position: absolute;
+  top: 13px;
+  right: 18px;
+  color: #d99bc5;
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+h2, h3, h4, legend { color: var(--kuromi-purple); }
+.section-index, .section-meta, .eyebrow { color: #a35f99; }
+.section-index {
+  border-color: #d99bc5;
+  background: #fff3fa;
+}
+label { color: #594563; }
+.req { color: #d15b9c; }
+input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]),
+select, textarea {
+  color: #493a51;
+  background: #fff7fc;
+  border: 1px solid #e2cfe8;
+  border-radius: 12px;
+}
+input::placeholder, textarea::placeholder { color: #a695ad; }
+input:focus, select:focus, textarea:focus {
+  border-color: #c47eaf;
+  outline: 0;
+  box-shadow: 0 0 0 4px rgba(212,119,173,.16);
+}
+input[type=checkbox], input[type=radio], input[type=range] { accent-color: #bd75ad; }
+input[type=file] { color: #806f89; }
+.input-wrap > .material-symbols-outlined,
+.panel-icon { color: #a36ca6; }
+.panel-head { border-bottom-color: #eadbec; }
+.panel-sub, .section-desc, .hint, .ayuda, small { color: #806f89; }
+.form-banner, .qr-card, .qr-preview, .social-card, .perfil-preview-box {
+  color: #594563;
+  background: #fff4fb;
+  border-color: #ead5e8;
+  border-radius: 15px;
+}
+.profile-avatar, .perfil-avatar {
+  border-color: #e8c8df;
+  box-shadow: 0 0 0 4px #f9eaf4;
+}
+table {
+  color: #493a51;
+  background: #fffaff;
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(66,43,78,.08);
+}
+th { color: #fff5fb; background: #493052; }
+th, td { border-color: #ead8ed !important; }
+tbody tr:nth-child(even) { background: #fbf3fa; }
+tbody tr:hover { background: #fce7f3; }
+.error-message, .field-error, .validation-error, .mensaje-error { color: #b34c78; }
+input.invalid, select.invalid, textarea.invalid, .campo-invalido {
+  border-color: #d65d91 !important;
+  background: #fff5f9 !important;
+  box-shadow: 0 0 0 3px rgba(214,93,145,.13) !important;
+}
+#resultadoEdad {
+  color: #76677e;
+  background: #fbf4fb;
+  border: 1px dashed #dfc8e2;
+  border-radius: 12px;
+}
+.edad-estado--mayor {
+  color: #397b61 !important;
+  background: #e5f5ed !important;
+  border-color: #a9d9bf !important;
+}
+.edad-estado--menor, .edad-estado--error {
+  color: #a53e70 !important;
+  background: #fff0f6 !important;
+  border-color: #edb3ce !important;
+}
+button:focus-visible, input:focus-visible, select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(212,119,173,.55);
+  outline-offset: 3px;
+}
+
+/* Indicador de pasos: círculos lavanda con acento rosa Kuromi */
+#registroWizard .stepper-track {
+  background: #e7d9eb;
+}
+#registroWizard .stepper-fill {
+  background: linear-gradient(90deg,#9a70b2,#e7a3cc);
+}
+#registroWizard .stepper-item .step-circle {
+  border-color: #d9c4e3;
+  background: #fff8fd;
+  color: #76508f;
+  box-shadow: 0 3px 10px rgba(82,54,94,.08);
+}
+#registroWizard .stepper-item .step-num {
+  border-color: #e2c7df;
+  background: #fff4fb;
+  color: #76508f;
+}
+#registroWizard .stepper-item .step-label { color: #806f89; }
+#registroWizard .stepper-item.is-active .step-circle {
+  border-color: #d477ad;
+  background: linear-gradient(135deg,#8e62b5,#d477ad);
+  color: #fff;
+  box-shadow: 0 0 0 5px rgba(212,119,173,.16),0 5px 13px rgba(142,98,181,.2);
+}
+#registroWizard .stepper-item.is-active .step-label,
+#registroWizard .stepper-item.is-complete .step-label { color: #a45e9c; }
+#registroWizard .stepper-item.is-complete .step-circle {
+  border-color: #d477ad;
+  background: #f2c5df;
+  color: #593b5b;
+}
+#registroWizard .stepper-item.is-complete .step-num {
+  border-color: #d477ad;
+  background: #f8e2f0;
+  color: #593b5b;
+}
+#registroWizard .stepper-item.is-clickable .step-btn:hover .step-circle {
+  border-color: #bd79b3;
+  box-shadow: 0 0 0 4px rgba(212,119,173,.13);
+}
+
+/* Detalles pequeños: estrellas y moñitos gráficos en áreas de apoyo */
+.eyebrow::before {
+  content: "✦ ";
+  color: #d477ad;
+}
+.section-heading .section-meta {
+  background: #fff4fb;
+  border: 1px solid #ead5e8;
+  border-radius: 999px;
+  padding: 7px 13px;
+}
+.wizard-actions, .controles-pasos, .acciones-formulario {
+  border-top-color: #ead8ed;
+}
+.controles-pasos .paso-siguiente {
+  color: #fff;
+  background: linear-gradient(120deg,#9a6ac0,#d477ad);
+}
+.progreso-formulario, .texto-final { color: #a45e9c; }
+
+@media (max-width: 700px) {
+  header, .main-header { border-radius: 19px; }
+  header::after, .main-header::after { right: 12px; bottom: 8px; font-size: .85rem; }
+  .header-logo { max-width: 88px; max-height: 88px; }
+  .wizard-card::before { top: 8px; right: 12px; }
+}
